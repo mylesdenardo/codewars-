@@ -1,0 +1,20 @@
+function solution(roman) {
+  const convert = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000,
+  };
+  return Array.from(roman.toUpperCase())
+    .map(item => convert[item] ?? 0)
+    .reduce(
+      (acc, cur, index, arr) =>
+        index > 0 && arr[index - 1] < cur
+          ? acc + cur - arr[index - 1] - arr[index - 1]
+          : acc + cur,
+      0
+    );
+}
